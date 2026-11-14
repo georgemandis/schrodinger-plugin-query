@@ -1,0 +1,31 @@
+name: Release
+
+# Builds the plugin for macOS (Apple silicon) and attaches it to a release.
+# Other platforms are not built yet.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  macos-arm64:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Build and stage
+        run: sh scripts/package-macos.sh
+
+      - name: Archive
+        run: |
+          ID=$(jq -r .id plugin.json)
+          VERSION=$(jq -r .version plugin.json)
+          tar czf "${ID}-${VERSION}-macos-arm64.tar.gz" -C "dist/${ID}" .
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: "*.tar.gz"
+          generate_release_notes: true

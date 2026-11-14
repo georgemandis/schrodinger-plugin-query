@@ -66,7 +66,7 @@ It is the full DuckDB dialect, including reading other files by path. Clearing t
 
 ```sh
 cargo test --release     # release, so that DuckDB is compiled once
-sh scripts/package.sh    # stages dist/query/
+sh scripts/package-macos.sh    # stages dist/query/
 ```
 
 The first build compiles DuckDB from source and takes several minutes.
