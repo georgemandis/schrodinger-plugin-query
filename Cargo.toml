@@ -1,0 +1,17 @@
+[package]
+name = "schrodinger-plugin-query"
+version = "0.1.0"
+edition = "2021"
+description = "Run SQL over a copied table with DuckDB"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+schrodinger-plugin-sdk = { git = "https://github.com/georgemandis/schrodinger-plugin-sdk" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+plist = "1"
+tempfile = "3"
+duckdb = { version = "1", features = ["bundled", "json", "parquet"] }

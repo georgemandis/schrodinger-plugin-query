@@ -1,0 +1,43 @@
+{
+  "id": "query",
+  "name": "Query",
+  "version": "0.1.0",
+  "description": "Run SQL over a copied table: totals, averages, counts by group, or your own query",
+  "author": "georgemandis",
+  "type": "native",
+  "entry": {
+    "macos-arm64": "lib/libschrodinger_plugin_query.dylib",
+    "linux-x86_64": "lib/libschrodinger_plugin_query.so",
+    "windows-x86_64": "lib/schrodinger_plugin_query.dll"
+  },
+  "platforms": ["macos", "linux", "windows"],
+  "preview": true,
+  "prompt": {
+    "mode": "sql",
+    "prefix": "=",
+    "hint": "Type = and a query in the search field. The clip is a table named clip.\n\n=sum(price)\n=where qty > 1\n=order by price desc limit 5\n=select region, sum(qty) from clip group by 1\n=summarize clip"
+  },
+  "modes": [
+    { "id": "summary", "label": "Summary", "default": true },
+    { "id": "columns", "label": "Columns and types" },
+    { "id": "count", "label": "Row count" },
+    { "id": "totals", "label": "Totals" },
+    { "id": "averages", "label": "Averages" },
+    { "id": "group-count", "label": "Count by first column" },
+    { "id": "group-totals", "label": "Totals by first column" },
+    { "id": "distinct", "label": "Unique rows" },
+    { "id": "sorted", "label": "Sorted by first column" },
+    { "id": "head", "label": "First 10 rows" },
+    { "id": "combined", "label": "Files combined" },
+    { "id": "sql", "label": "Your query (type =)" }
+  ],
+  "config": {
+    "format": {
+      "type": "select",
+      "default": "Markdown table",
+      "label": "Paste results as",
+      "description": "The text form of a result. Apps that paste rich text (documents, spreadsheets, mail) get a real table either way.",
+      "options": ["Markdown table", "Tab-separated", "CSV", "JSON"]
+    }
+  }
+}
